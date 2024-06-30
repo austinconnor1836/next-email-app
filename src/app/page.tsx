@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
 
-export default function Home() {
+export default function t() {
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [text, setText] = useState('');
