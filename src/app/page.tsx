@@ -4,7 +4,7 @@ import Particles from "@/app/_components/particles";
 
 const navigation = [
   { name: "Blog", href: "/posts" },
-  { name: "Playground - Uppercase Text", href: "/playground/uppercase-text" },
+  { name: "Playground - Custom Context Menu", href: "/playground/custom-context-menu" },
 ];
 
 export default function Home() {
