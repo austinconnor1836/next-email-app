@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/favicon.png",
+    icon: "/favicon/favicon.png",
   },
 };
 const inter = Inter({
@@ -69,6 +69,12 @@ export default function RootLayout({
           type="image/png"
           sizes="32x32"
           href="/favicon/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon/favicon.png"
         />
         <link
           rel="icon"

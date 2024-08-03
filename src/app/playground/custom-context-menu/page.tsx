@@ -18,20 +18,23 @@ const UppercaseTextPage: React.FC = () => {
     setContextMenuVisible(false);
   };
 
+  // Function to convert text to uppercase and copy it to clipboard
   const handleCopyUpperCase = () => {
     if (selectedText) {
       const newText = text.replace(selectedText, selectedText.toUpperCase());
+      navigator.clipboard.writeText(newText).then(() => {
+        alert(`"${newText}" copied to clipboard!`);
+      });
       setText(newText);
       setSelectedText('');
-
-      handleCopy();
     }
+    setContextMenuVisible(false);
   };
 
   // Function to copy text to clipboard
   const handleCopy = () => {
     navigator.clipboard.writeText(text).then(() => {
-      alert('Text copied to clipboard!');
+      alert(`"${text}" copied to clipboard!`);
     });
     setContextMenuVisible(false);
   };
@@ -66,6 +69,8 @@ const UppercaseTextPage: React.FC = () => {
       window.removeEventListener('click', handleClick);
     };
   }, [selectedText]);
+
+  useEffect(() => setSelectedText(text), []);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
