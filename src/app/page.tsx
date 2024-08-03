@@ -4,6 +4,7 @@ import Particles from "@/app/_components/particles";
 
 const navigation = [
   { name: "Blog", href: "/posts" },
+  { name: "Playground - Uppercase Text", href: "/playground/uppercase-text" },
 ];
 
 export default function Home() {
