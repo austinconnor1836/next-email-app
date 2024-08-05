@@ -5,7 +5,7 @@ import ContextMenu from '@/app/_components/custom-context-menu'; // Import the C
 
 const UppercaseTextPage: React.FC = () => {
   const [selectedText, setSelectedText] = useState('');
-  const [text, setText] = useState('Select some text and right-click to see options.');
+  const [text, setText] = useState(`Enter some text or don't.`);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
 
   // Function to convert the selected text to uppercase
@@ -13,9 +13,10 @@ const UppercaseTextPage: React.FC = () => {
     if (selectedText) {
       const newText = text.replace(selectedText, selectedText.toUpperCase());
       setText(newText);
-      setSelectedText('');
+      setSelectedText(newText);
     }
     setContextMenuVisible(false);
+    alert()
   };
 
   // Function to convert text to uppercase and copy it to clipboard
@@ -26,7 +27,7 @@ const UppercaseTextPage: React.FC = () => {
         alert(`"${newText}" copied to clipboard!`);
       });
       setText(newText);
-      setSelectedText('');
+      setSelectedText(newText);
     }
     setContextMenuVisible(false);
   };
@@ -87,7 +88,6 @@ const UppercaseTextPage: React.FC = () => {
         {/* Use the ContextMenu component */}
         <ContextMenu
           visible={true}
-          onUpperCase={handleUpperCase}
           onCopy={handleCopy}
           onCopyUpperCase={handleCopyUpperCase}
         />

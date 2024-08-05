@@ -4,14 +4,12 @@ import React, { useState } from 'react';
 
 interface ContextMenuProps {
   visible: boolean;
-  onUpperCase: () => void;
   onCopy: () => void;
   onCopyUpperCase: () => void;
 }
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
   visible,
-  onUpperCase,
   onCopy,
   onCopyUpperCase,
 }) => {
@@ -29,12 +27,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       }`}
     >
       <ul>
-        <li
-          onClick={onUpperCase}
-          className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-        >
-          UPPER CASE
-        </li>
         <li className="relative">
           <div
             onClick={onCopy} // Copy action for the main item
