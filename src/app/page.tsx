@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "@/app/_components/particles";
+import { lusitana } from "./ui/fonts";
 
 const navigation = [
   { name: "Blog", href: "/posts" },
-  { name: "Playground - Custom Context Menu", href: "/playground/custom-context-menu" },
+  // { name: "Playground - Custom Components - Context Menu", href: "/playground/custom-components/custom-context-menu" },
+  // { name: "Playground - Custom Components - Side Nav", href: "/playground/custom-components/sidenav" },
 ];
 
 export default function Home() {
@@ -28,7 +30,7 @@ export default function Home() {
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={100}
       />
-      <h1 className="py-3.5 px-0.5 z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
+      <h1 className={`${lusitana} py-3.5 px-0.5 z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text`}>
         austin
       </h1>
 

@@ -1,19 +1,17 @@
 import "@/app/ui/global.css";
-import React from 'react';
-// import { Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
-import { Provider } from "react-redux";
 import { Analytics } from "@/app/_components/analytics";
 import { ThemeSwitcher } from "./_components/theme-switcher";
-// import cn from "classnames";
+import cn from "classnames";
+import Navbar from "./_components/navbar";
 import { inter } from "./ui/fonts";
-// import { useState } from "react";
-import ClientLayout from './client-layout';
-import Navbar from './_components/navbar';
-import { store } from "./util/store";
-import StoreProvider from "./StoreProvider";
-import HamburgerMenu from "./_components/hamburger";
+import { useState } from "react";
+import ChatBar from "./_components/chat/chatbar";
+import ChatBot from "./_components/chat/chatbot";
+import SplitViewButton from "./_components/chat/splitview-button";
+import ClientLayout from "./client-layout";
 
 export const metadata: Metadata = {
   title: {
@@ -55,7 +53,25 @@ const calSans = LocalFont({
   variable: "--font-calsans",
 });
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [openChats, setOpenChats] = useState<number[]>([]);
+  const [splitView, setSplitView] = useState(false);
+
+  const handleOpenChat = (id: number) => {
+    setOpenChats((prevChats) => [...prevChats, id]);
+  };
+
+  const handleCloseChat = (id: number) => {
+    setOpenChats((prevChats) => prevChats.filter((chatId) => chatId !== id));
+  };
+
+  const handleToggleSplitView = () => {
+    setSplitView(!splitView);
+  };
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
       {/* <html lang="en" className={`${inter.className} antialiased`}> */}
@@ -103,14 +119,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         // className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
         className={`${inter.className} dark:bg-slate-900 dark:text-slate-400`}
       >
-        <StoreProvider>
-          <ThemeSwitcher />
+        <ClientLayout>
           <Navbar />
-          <HamburgerMenu />
-          <ClientLayout>
-            {children}
-          </ClientLayout>
-          </StoreProvider>
+          <ThemeSwitcher />
+          <SplitViewButton onToggleSplitView={handleToggleSplitView} />
+
+          {splitView ? (
+            <div className="flex h-full">
+              <div className="w-1/3 bg-gray-100 border-r">
+                {openChats.map((chatId) => (
+                  <ChatBot key={chatId} id={chatId} onClose={handleCloseChat} />
+                ))}
+              </div>
+              <div className="flex-1 overflow-y-auto">{children}</div>
+            </div>
+          ) : (
+            <>
+              {children}
+              {openChats.map((chatId) => (
+                <ChatBot key={chatId} id={chatId} onClose={handleCloseChat} />
+              ))}
+            </>
+          )}
+
+          <ChatBar openChats={openChats} onSelectChat={handleOpenChat} />
+        </ClientLayout>
       </body>
     </html>
   );
