@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "@/app/_components/analytics";
-import { ThemeSwitcher } from "./_components/theme-switcher";
+import { ThemeSwitcher } from "./_components/theme-switcher-og";
 import cn from "classnames";
 import Navbar from "./_components/navbar";
 import { inter } from "./ui/fonts";

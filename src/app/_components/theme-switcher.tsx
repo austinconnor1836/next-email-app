@@ -66,7 +66,13 @@ const Switch = () => {
 
   useEffect(() => {
     // store global functions to local variables to avoid any interference
-    updateDOM = window.updateDOM;
+    // updateDOM = window.updateDOM;
+    if (!updateDOM) {
+      const scriptElement = document.createElement("script");
+      scriptElement.innerHTML = `(${NoFOUCScript.toString()})('${STORAGE_KEY}')`;
+      document.head.appendChild(scriptElement);
+      updateDOM = window.updateDOM;
+    }
     /** Sync the tabs */
     addEventListener("storage", (e: StorageEvent): void => {
       e.key === STORAGE_KEY && setMode(e.newValue as ColorSchemePreference);
@@ -77,6 +83,8 @@ const Switch = () => {
     localStorage.setItem(STORAGE_KEY, mode);
     updateDOM();
   }, [mode]);
+
+  
 
   /** toggle mode */
   const handleModeSwitch = () => {

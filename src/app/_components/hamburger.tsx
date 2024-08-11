@@ -12,13 +12,27 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 const HamburgerMenu: React.FC = () => {
   const dispatch = useAppDispatch();
   const isMenuOpen = useAppSelector((state: RootState) => state.ui.isMenuOpen);
+  const theme = useAppSelector((state: RootState) => state.ui.theme);
+  console.log('theme', theme);
+  // const iconColor = theme === 'dark' ? '#FFFFFF' : '#FFFFFF'; // Light color for dark theme, dark color for light theme
+  const styles = {
+    iconButton: {
+    },
+    innerIcon: {
+      transform: 'rotate(0deg)',
+      transition: 'transform 0.3s ease-in-out',
+    },
+  }
 
   return (
-    <IconButton onClick={() => dispatch(toggleMenu())} className="absolute top-16 z-10">
+    // <IconButton onClick={() => dispatch(toggleMenu())} className="absolute top-16 z-10 ml-2">
+    <IconButton onClick={() => dispatch(toggleMenu())} className={`absolute top-16 z-10 ${theme === 'dark' ? 'light' : 'dark'}`}>
       {isMenuOpen ? (
-        <CloseIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
+        // <CloseIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
+        <CloseIcon fontSize='large' style={styles.innerIcon} />
       ) : (
-        <MenuIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
+        // <MenuIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
+        <MenuIcon fontSize='large'style={styles.innerIcon} />
       )}
     </IconButton>
   );

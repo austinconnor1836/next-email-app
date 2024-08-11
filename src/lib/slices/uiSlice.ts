@@ -1,14 +1,18 @@
 // lib/slices/uiSlice.ts
+import { THEME_MODE } from '@/app/ui/types';
 import { createAppSlice } from '../createAppSlice';
+const { DARK, LIGHT, SYSTEM } = THEME_MODE;
+
 
 interface UIState {
   isMenuOpen: boolean;
-  theme: 'light' | 'dark';
+  theme: THEME_MODE
+  ;
 }
 
 const initialState: UIState = {
   isMenuOpen: true,
-  theme: 'dark',
+  theme: localStorage.getItem('theme') as THEME_MODE ?? SYSTEM,
 };
 
 export const uiSlice = createAppSlice({
@@ -19,7 +23,22 @@ export const uiSlice = createAppSlice({
       state.isMenuOpen = !state.isMenuOpen;
     }),
     toggleTheme: create.reducer((state) => {
-      state.theme = state.theme === 'light' ? 'dark' : 'light';
+      const theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : state.theme;
+      switch (theme) {
+        case LIGHT:
+          state.theme = DARK;
+          break;
+        case DARK:
+          state.theme = SYSTEM;
+          break;
+        case SYSTEM:
+          state.theme = LIGHT;
+          break;
+        default:
+          state.theme = LIGHT;
+        localStorage.setItem('theme', state.theme);
+      }
+      // state.theme = state.theme === 'light' ? 'dark' : 'light';
     }),
   }),
   selectors: {

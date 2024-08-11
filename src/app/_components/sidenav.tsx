@@ -11,10 +11,7 @@ const SidePanel: React.FC = () => {
   // return <TemporaryDrawer />
   return (
     // <div className="w-64 h-screen bg-gray-100 shadow-lg">
-    <div className="mt-2 w-64 h-screen shadow-lg">
-      <div className="p-4 border-b border-gray-300 bg-gray-200">
-        <h2 className="pt-3 text-lg font-bold text-gray-800">Navigation</h2>
-      </div>
+    <div className="mt-24 w-64 h-screen shadow-lg">
       <ul className="p-2 space-y-2">
         {items.map((item, index) => (
           <li

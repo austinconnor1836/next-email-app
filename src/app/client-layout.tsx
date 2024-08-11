@@ -12,7 +12,7 @@ import SidePanel from './_components/sidenav';
 import { RootState, store } from './util/store';
 import { Provider, useSelector } from 'react-redux';
 import HamburgerMenu from './_components/hamburger';
-import { ThemeSwitcher } from './_components/theme-switcher';
+import { ThemeSwitcher } from './_components/theme-switcher-og';
 import { selectIsMenuOpen } from '@/lib/slices/uiSlice';
 import { useAppSelector } from '@/lib/hooks';
 import { usePathname } from 'next/navigation';
@@ -38,7 +38,7 @@ const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   const pathname = usePathname();
 
   return (
-    <div className={`relative h-screen overflow-hidden ${theme === 'dark' ? 'dark' : ''}`}>
+    <div className={`relative h-screen overflow-hidden ${theme === 'dark' ? 'dark' : 'light'}`}>
       <>
         {isMenuOpen && pathname !== '/' ? (
           <div className="flex h-full">
