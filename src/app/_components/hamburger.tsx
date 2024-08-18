@@ -25,16 +25,17 @@ const HamburgerMenu: React.FC = () => {
   }
 
   return (
+    <></>
     // <IconButton onClick={() => dispatch(toggleMenu())} className="absolute top-16 z-10 ml-2">
-    <IconButton onClick={() => dispatch(toggleMenu())} className={`absolute top-16 z-10 ${theme === 'dark' ? 'light' : 'dark'}`}>
-      {isMenuOpen ? (
-        // <CloseIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
-        <CloseIcon fontSize='large' style={styles.innerIcon} />
-      ) : (
-        // <MenuIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
-        <MenuIcon fontSize='large'style={styles.innerIcon} />
-      )}
-    </IconButton>
+    // <IconButton onClick={() => dispatch(toggleMenu())} className={`absolute top-16 z-10 ${theme === 'dark' ? 'light' : 'dark'}`}>
+    //   {isMenuOpen ? (
+    //     // <CloseIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
+    //     <CloseIcon fontSize='large' style={styles.innerIcon} />
+    //   ) : (
+    //     // <MenuIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
+    //     <MenuIcon fontSize='large'style={styles.innerIcon} />
+    //   )}
+    // </IconButton>
   );
 };
 
