@@ -1,0 +1,18 @@
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.circle-path {
+  stroke-dasharray: 283; /* This value should be equal to the circumference of the circle */
+  stroke-dashoffset: 283;
+  animation: trace 2s linear forwards;
+}
+
+@keyframes trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
