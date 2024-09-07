@@ -1,7 +1,7 @@
-// components/ChatGPT.tsx
 import React, { useState } from 'react';
 import { TextField, Button, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
 import axios from 'axios';
+import { ApiRoutes, buildApiRoute } from '@/lib/api-routes';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -26,7 +26,8 @@ const ChatGPT: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/chat', { message: input });
+      const gptApiRoute = buildApiRoute(ApiRoutes.CHAT_GPT);
+      const response = await axios.post(gptApiRoute, { message: input });
       const assistantMessage: Message = { role: 'assistant', content: response.data.message };
       setMessages([...messages, userMessage, assistantMessage]);
     } catch (error) {
@@ -37,42 +38,53 @@ const ChatGPT: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <List>
-        {messages.map((msg, index) => (
-          <ListItem key={index}>
-            <ListItemText
-              primary={msg.content}
-              style={{ textAlign: msg.role === 'user' ? 'right' : 'left' }}
-            />
-          </ListItem>
-        ))}
-      </List>
+    // <div className="max-w-xl h-screen flex flex-col">
+    <div className="h-screen flex flex-col">
+      {/* View window (80% of the height) */}
+      <div className="flex-grow overflow-auto">
+        <List>
+          {messages.map((msg, index) => (
+            <ListItem key={index}>
+              <ListItemText
+                primary={msg.content}
+                className={msg.role === 'user' ? 'text-right' : 'text-left'}
+              />
+            </ListItem>
+          ))}
+        </List>
+        {loading && <CircularProgress />}
+      </div>
 
-      {loading && <CircularProgress />}
-
-      <TextField
-        label="Type a message"
-        fullWidth
-        variant="outlined"
-        value={input}
-        onChange={handleInputChange}
-        onKeyPress={(event) => {
-          if (event.key === 'Enter') {
-            handleSendMessage();
-          }
-        }}
-        disabled={loading}
-      />
-      <Button
-        onClick={handleSendMessage}
-        variant="contained"
-        fullWidth
-        style={{ marginTop: '10px' }}
-        disabled={loading}
-      >
-        Send
-      </Button>
+      {/* Input and button (20% of the height) */}
+      {/* <div className="h-1/5 flex space-x-2 p-4"> */}
+      <div className="h-1/5 w-4/5 flex mx-auto space-x-2">
+        <TextField
+        className="flex-grow w-4/5"
+          label="Type a message"
+          fullWidth
+          variant="outlined"
+          value={input}
+          onChange={handleInputChange}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              handleSendMessage();
+            }
+          }}
+          disabled={loading}
+        />
+        <div className='w-1/5'>
+        <Button
+          className='mt-2'
+          onClick={handleSendMessage}
+          variant="contained"
+          // fullWidth
+          size='medium'
+          // disabled={loading}
+        >
+          Send
+        </Button>
+        </div>
+      </div>
     </div>
   );
 };

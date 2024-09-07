@@ -1,17 +1,15 @@
-// pages/api/chat.ts
-import { NextApiRequest, NextApiResponse } from 'next';
+// src/app/api/ai/route.ts
+import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Make sure to set this in your .env.local
-console.log('OPENAI_API_KEY', OPENAI_API_KEY);
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Only POST requests allowed' });
+    return NextResponse.json({ message: 'Only POST requests allowed' }, { status: 405 });
   }
 
-  const { message } = req.body;
-
+  const { message } = await req.json();
 
   try {
     const response = await axios.post(
@@ -29,8 +27,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     const assistantMessage = response.data.choices[0].message.content;
-    res.status(200).json({ message: assistantMessage });
+    return NextResponse.json({ message: assistantMessage }, { status: 200 });
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching from OpenAI API' });
+    console.error('Error fetching from OpenAI API:', error);
+    return NextResponse.json({ message: 'Error fetching from OpenAI API' }, { status: 500 });
   }
-};
+}
