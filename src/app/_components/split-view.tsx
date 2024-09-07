@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { RootState } from '../util/store';
+import { RootState } from '../../lib/store';
 
 type Props = {}
 

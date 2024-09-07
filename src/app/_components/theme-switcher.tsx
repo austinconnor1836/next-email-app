@@ -37,8 +37,10 @@ export const NoFOUCScript = (storageKey: string) => {
 
   /** function to add remove dark class */
   window.updateDOM = () => {
+    const isBrowser = typeof window !== "undefined";
     const restoreTransitions = modifyTransition();
-    const mode = localStorage.getItem(storageKey) ?? SYSTEM;
+    // const mode = (isBrowser && localStorage?.getItem(storageKey)) ?? SYSTEM;
+    const mode = !isBrowser ? SYSTEM : localStorage?.getItem(storageKey) ?? SYSTEM;
     const systemMode = media.matches ? DARK : LIGHT;
     const resolvedMode = mode === SYSTEM ? systemMode : mode;
     const classList = document.documentElement.classList;
@@ -57,12 +59,17 @@ let updateDOM: () => void;
  * Switch button to quickly toggle user preference.
  */
 const Switch = () => {
+  const isBrowser = typeof window !== "undefined";
   const [mode, setMode] = useState<ColorSchemePreference>(
     () =>
-      ((typeof localStorage !== "undefined" &&
-        localStorage.getItem(STORAGE_KEY)) ??
+      // ((typeof localStorage !== "undefined" &&
+      //   localStorage?.getItem(STORAGE_KEY)) ??
+      //   "system") as ColorSchemePreference,
+      // );
+      !isBrowser ? 'system' as ColorSchemePreference : ((typeof localStorage !== "undefined" &&
+        localStorage?.getItem(STORAGE_KEY)) ??
         "system") as ColorSchemePreference,
-  );
+      );
 
   useEffect(() => {
     // store global functions to local variables to avoid any interference
@@ -80,7 +87,7 @@ const Switch = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, mode);
+    localStorage && localStorage?.setItem(STORAGE_KEY, mode);
     updateDOM();
   }, [mode]);
 

@@ -13,7 +13,6 @@ const HamburgerMenu: React.FC = () => {
   const dispatch = useAppDispatch();
   const isMenuOpen = useAppSelector((state: RootState) => state.ui.isMenuOpen);
   const theme = useAppSelector((state: RootState) => state.ui.theme);
-  console.log('theme', theme);
   // const iconColor = theme === 'dark' ? '#FFFFFF' : '#FFFFFF'; // Light color for dark theme, dark color for light theme
   const styles = {
     iconButton: {

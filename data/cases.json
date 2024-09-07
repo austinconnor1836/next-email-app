@@ -1,19 +1,11 @@
 [
   {
-    "number": "SEARCH TIPS\n                                            Search term too short \n                                            Invalid text in search term. Try again",
-    "date": "ADVANCED SEARCH\n                                        DOCKET SEARCH",
-    "docket": "",
-    "name": "",
-    "judge": "",
-    "citation": ""
-  },
-  {
-    "number": "",
-    "date": "",
-    "docket": "",
-    "name": "",
-    "judge": "",
-    "citation": ""
+    "number": "60",
+    "date": "8/16/24",
+    "docket": "24A78",
+    "name": "Department of Education v. Louisiana",
+    "judge": "PC",
+    "citation": "603/1"
   },
   {
     "number": "59",
@@ -94,14 +86,6 @@
     "name": "SEC v. Jarkesy\nRevisions: 6/27/24",
     "judge": "R",
     "citation": "603/1"
-  },
-  {
-    "number": "",
-    "date": "",
-    "docket": "",
-    "name": "",
-    "judge": "",
-    "citation": ""
   },
   {
     "number": "49",
@@ -349,7 +333,7 @@
     "docket": "22-1078",
     "name": "Warner Chappell Music, Inc. v. Nealy",
     "judge": "EK",
-    "citation": "601/2"
+    "citation": "601 U.S. 366"
   },
   {
     "number": "18",
@@ -357,7 +341,7 @@
     "docket": "22-193",
     "name": "Muldrow v. City of St. Louis",
     "judge": "EK",
-    "citation": "601/2"
+    "citation": "601 U.S. 346"
   },
   {
     "number": "17",

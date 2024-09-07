@@ -11,7 +11,6 @@ import { inter } from "./ui/fonts";
 // import { useState } from "react";
 import ClientLayout from './client-layout';
 import Navbar from './_components/navbar';
-import { store } from "./util/store";
 import StoreProvider from "./StoreProvider";
 import HamburgerMenu from "./_components/hamburger";
 
@@ -58,7 +57,6 @@ const calSans = LocalFont({
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      {/* <html lang="en" className={`${inter.className} antialiased`}> */}
       <head>
         <Analytics />
         <link
@@ -100,7 +98,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body
-        // className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
         className={`${inter.className} dark:bg-slate-900 dark:text-slate-400`}
       >
         <StoreProvider>

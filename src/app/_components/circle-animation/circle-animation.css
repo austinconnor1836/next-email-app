@@ -2,17 +2,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
-.circle-path {
-  stroke-dasharray: 283; /* This value should be equal to the circumference of the circle */
-  stroke-dashoffset: 283;
-  animation: trace 2s linear forwards;
+.circle-segment {
+  stroke-dasharray: 94 189; /* 1/3 of the circumference for the segment, 2/3 gap */
+  stroke-dashoffset: 0;
+  animation: rotate 4s linear infinite;
 }
 
-@keyframes trace {
+.segment-1 {
+  stroke-dashoffset: 0;
+}
+
+.segment-2 {
+  stroke-dashoffset: 94; /* Offset by one segment length */
+}
+
+.segment-3 {
+  stroke-dashoffset: 188; /* Offset by two segment lengths */
+}
+
+@keyframes rotate {
   to {
-    stroke-dashoffset: 0;
+    transform: rotate(360deg);
   }
 }

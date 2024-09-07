@@ -14,7 +14,7 @@ const loadStoredCases = async (): Promise<Case[]> => {
   try {
     const data = await fs.readFile(filePath, 'utf-8');
     return JSON.parse(data);
-  } catch (error) {
+  } catch (error: any) {
     if (error.code === 'ENOENT') {
       // If file not found, return an empty array
       return [];

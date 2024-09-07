@@ -12,7 +12,7 @@ interface UIState {
 
 const initialState: UIState = {
   isMenuOpen: true,
-  theme: localStorage.getItem('theme') as THEME_MODE ?? SYSTEM,
+  theme: THEME_MODE.SYSTEM
 };
 
 export const uiSlice = createAppSlice({
@@ -23,7 +23,10 @@ export const uiSlice = createAppSlice({
       state.isMenuOpen = !state.isMenuOpen;
     }),
     toggleTheme: create.reducer((state) => {
-      const theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : state.theme;
+      const isBrowser = typeof window !== 'undefined';
+      const theme = isBrowser ? localStorage?.getItem('theme') : state.theme;
+      // const theme = (localStorage && localStorage?.getItem('theme')) ? localStorage?.getItem('theme') : state.theme;
+      // const theme = state.theme;
       switch (theme) {
         case LIGHT:
           state.theme = DARK;
@@ -36,8 +39,8 @@ export const uiSlice = createAppSlice({
           break;
         default:
           state.theme = LIGHT;
-        localStorage.setItem('theme', state.theme);
       }
+      localStorage?.setItem('theme', state.theme);
       // state.theme = state.theme === 'light' ? 'dark' : 'light';
     }),
   }),

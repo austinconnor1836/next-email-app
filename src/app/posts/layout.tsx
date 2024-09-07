@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
       <div className="flex h-screen">
-        <div className="flex-1 p-4 overflow-y-auto">{children}</div>
+        <div className="flex-1 p-4 mt-8 overflow-y-auto">{children}</div>
       </div>
   );
 }
