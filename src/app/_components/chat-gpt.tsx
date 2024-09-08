@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
 import axios from 'axios';
+import OpenAI from "openai";
 import { ApiRoutes, buildApiRoute } from '@/lib/api-routes';
 
 interface Message {
@@ -27,9 +28,27 @@ const ChatGPT: React.FC = () => {
 
     try {
       const gptApiRoute = buildApiRoute(ApiRoutes.CHAT_GPT);
-      const response = await axios.post(gptApiRoute, { message: input });
-      const assistantMessage: Message = { role: 'assistant', content: response.data.message };
-      setMessages([...messages, userMessage, assistantMessage]);
+      const openai = new OpenAI();
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+            {
+              role: "user",
+              content: "Write a haiku about recursion in programming.",
+            },
+        ],
+      });
+
+      console.log(completion.choices[0].message);
+      const responseMsg = completion.choices[0].message;
+      // const response = await axios.post(gptApiRoute, { message: input });
+      // const assistantMessage: Message = { role: 'assistant', content: response.data.message };
+      if (responseMsg) {
+        const assistantMessage: Message = { role: 'assistant', content: responseMsg?.content?.toString() ?? '' };
+        setMessages([...messages, userMessage, assistantMessage]);
+      }
     } catch (error) {
       console.error('Error fetching ChatGPT response:', error);
     } finally {

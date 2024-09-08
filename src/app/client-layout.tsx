@@ -8,13 +8,25 @@ import SidePanel from './_components/sidenav';
 import { selectIsMenuOpen } from '@/lib/slices/uiSlice';
 import { useAppSelector } from '@/lib/hooks';
 import { usePathname } from 'next/navigation';
+import HomeIcon from '@mui/icons-material/Home'; 
+import PostAddIcon from '@mui/icons-material/PostAdd'; 
+import CategoryIcon from '@mui/icons-material/Category'; 
+import ArchiveIcon from '@mui/icons-material/Archive'; 
+import { SideNavItem } from './ui/types';
+
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [openChats, setOpenChats] = useState<number[]>([]);
   const [splitView, setSplitView] = useState(false);
   const [theme, setTheme] = useState('light');
   const isMenuOpen = useAppSelector(selectIsMenuOpen);
-  const sideNavItems = ['Home', 'New Post', 'Categories', 'Archives'];
+  // const sideNavItems = ['Home', 'New Post', 'Categories', 'Archives'];
+  const sideNavItems: SideNavItem[] = [
+  { label: 'Home', element: <HomeIcon /> },
+  { label: 'New Post', element: <PostAddIcon /> },
+  { label: 'Categories', element: <CategoryIcon /> },
+  { label: 'Archives', element: <ArchiveIcon /> },
+];
 
   const handleOpenChat = (id: number) => {
     if (!openChats.includes(id)) {

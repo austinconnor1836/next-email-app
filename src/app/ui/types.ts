@@ -3,3 +3,8 @@ export enum THEME_MODE {
     DARK = 'dark',
     SYSTEM = 'system',
 }
+
+export interface SideNavItem {
+    label: string;
+    element: React.ReactNode;
+}

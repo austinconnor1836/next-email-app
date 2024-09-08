@@ -1,40 +1,31 @@
-'use client';
-
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
-import { RootState } from '../../lib/store';
-import { toggleMenu } from '../../lib/slices/uiSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import './hamburger.css';
+import { useHamburger } from '@/app/context/HamburgerContext';
 
 const HamburgerMenu: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const isMenuOpen = useAppSelector((state: RootState) => state.ui.isMenuOpen);
-  const theme = useAppSelector((state: RootState) => state.ui.theme);
-  // const iconColor = theme === 'dark' ? '#FFFFFF' : '#FFFFFF'; // Light color for dark theme, dark color for light theme
-  const styles = {
-    iconButton: {
-    },
-    innerIcon: {
-      transform: 'rotate(0deg)',
-      transition: 'transform 0.3s ease-in-out',
-    },
-  }
+  const { isOpen, toggleMenu } = useHamburger();
 
   return (
-    <></>
-    // <IconButton onClick={() => dispatch(toggleMenu())} className="absolute top-16 z-10 ml-2">
-    // <IconButton onClick={() => dispatch(toggleMenu())} className={`absolute top-16 z-10 ${theme === 'dark' ? 'light' : 'dark'}`}>
-    //   {isMenuOpen ? (
-    //     // <CloseIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
-    //     <CloseIcon fontSize='large' style={styles.innerIcon} />
-    //   ) : (
-    //     // <MenuIcon style={{ transition: 'transform 0.3s ease-in-out', transform: 'rotate(0deg)' }} />
-    //     <MenuIcon fontSize='large'style={styles.innerIcon} />
-    //   )}
-    // </IconButton>
+    <button
+      className={`menu ${isOpen ? 'opened' : ''} focus:outline-none`} // Add 'opened' class if isOpen is true
+      onClick={toggleMenu} // Use React's event handler
+      aria-expanded={isOpen}
+      aria-label="Main Menu"
+    >
+      <svg width="50" height="50" viewBox="0 0 100 100" className="text-gray-800 dark:text-gray-300 transition-colors duration-300">
+        <path
+          className="line line1"
+          d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+          stroke='currentColor'
+        />
+        <path className="line line2" d="M 20,50 H 80" stroke='currentColor' />
+        <path
+          className="line line3"
+          d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+          stroke='currentColor'
+        />
+      </svg>
+    </button>
   );
 };
 

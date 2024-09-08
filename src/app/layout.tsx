@@ -5,6 +5,7 @@ import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Provider } from "react-redux";
 import { Analytics } from "@/app/_components/analytics";
+import { HamburgerProvider } from '@/app/context/HamburgerContext';
 import { ThemeSwitcher } from "./_components/theme-switcher";
 // import cn from "classnames";
 import { inter } from "./ui/fonts";
@@ -101,12 +102,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className={`${inter.className} dark:bg-slate-900 dark:text-slate-400`}
       >
         <StoreProvider>
+          <HamburgerProvider>
           <ThemeSwitcher />
           <Navbar />
-          <HamburgerMenu />
           <ClientLayout>
             {children}
           </ClientLayout>
+          </HamburgerProvider>
           </StoreProvider>
       </body>
     </html>
